@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Bionics - Interpretador de Lenguaje de Señas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+      
+      const firebaseConfig = {
+        apiKey: "AIzaSyDdWgvOqokCGt0aY1vJBHva_i1SUfuRyYY",
+        authDomain: "bridged-bionics.firebaseapp.com",
+        projectId: "bridged-bionics",
+        storageBucket: "bridged-bionics.firebasestorage.app",
+        messagingSenderId: "1016605457823",
+        appId: "1:1016605457823:web:9434f170bfeb8605f891aa",
+        measurementId: "G-HKBFZT2010"
+      };
+      
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#060302',
+                        terracotta: '#bd623c',
+                        copperDark: '#4e2513',
+                        cream: '#f2ded0',
+                        mutedBrown: '#b29d90',
+                        paleSky: '#C9E0EB',
+                        dustyDenim: '#7392B5',
+                        deepLilac: '#8350C4',
+                        midnightViolet: '#402B47',
+                        shadowGrey: '#262423',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-shadowGrey text-paleSky antialiased select-none overflow-x-hidden" style="background: linear-gradient(135deg, #262423 0%, #1a1918 100%);">
+
+    <nav class="fixed top-0 left-0 w-full h-20 bg-shadowGrey/80 backdrop-blur-xl border-b border-deepLilac/20 z-50 flex items-center justify-between px-8 md:px-16 transition-all duration-300">
+        <div class="font-space-grotesk text-lg font-bold tracking-widest text-paleSky">
+            BRIDGE <span class="text-deepLilac font-space-grotesk font-bold">BIONICS</span>
+        </div>
+        <ul class="hidden md:flex gap-6 text-sm tracking-[0.25em] uppercase font-bold text-paleSky items-center">
+            <li><a href="#inicio" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Inicio</a></li>
+            <li><a href="#generalidades" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Plantilla</a></li>
+            <li><a href="#analisis" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Análisis</a></li>
+            <li><a href="#carrusel" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Diseño 3D</a></li>
+            <li><a href="#circuito" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Circuito</a></li>
+            <li><a href="#materiales" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Materiales</a></li>
+            <li><a href="#aplicacion" class="nav-link hover:text-deepLilac transition-all duration-300 hover:scale-110">Aplicación</a></li>
+            <li><button onclick="openLoginModal()" class="px-4 py-2 bg-deepLilac text-shadowGrey font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 hover:scale-105">Ingreso</button></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" class="relative h-screen w-full flex items-center justify-center border-b border-deepLilac/20 overflow-hidden">
+        <div class="absolute inset-0 w-full h-full z-10">
+            <model-viewer
+                src="prueba.glb"
+                alt="Estructura Mecánica Cyber Hand"
+                camera-controls
+                auto-rotate
+                rotation-per-second="12deg"
+                interaction-prompt="none"
+                camera-orbit="25deg 75deg 105%"
+                field-of-view="26deg"
+                style="width: 100%; height: 100%; --poster-color: transparent;">
+            </model-viewer>
+        </div>
+
+        <div id="hero-text" class="relative z-20 max-w-2xl text-center px-8 transform transition-all duration-100 ease-out">
+            <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-4 glow-text">Ecosistema IoT de Alta Fidelidad</span>
+            <h1 class="font-space-grotesk text-6xl md:text-7xl font-bold leading-none tracking-wide text-paleSky mb-6">
+                Bridge <span class="text-deepLilac glow-text">Bionics</span>
+            </h1>
+            <p id="hero-description" class="font-light text-xs text-dustyDenim leading-[1.9] tracking-wider glow-text description-hover">
+                Una interfaz robótica de vanguardia diseñada bajo un ecosistema automatizado para interpretar y emular las variantes mecánicas del Lenguaje de Señas Colombiano (LSC), uniendo el control de microcontroladores con capas operacionales.
+            </p>
+        </div>
+        
+        <div class="absolute right-12 bottom-0 top-0 w-[1px] bg-deepLilac/10 hidden md:block"></div>
+    </section>
+
+    <section id="generalidades" class="py-28 px-8 md:px-24 border-b border-deepLilac/20 relative bg-gradient-to-b from-shadowGrey to-[#1a1918]">
+        <div class="max-w-7xl mx-auto">
+            <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-3">Componentes Estructurales</span>
+            <h2 class="font-space-grotesk text-4xl font-bold tracking-widest mb-16 text-paleSky">Plantilla <span class="text-deepLilac">SENA</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="glass-card group block p-12 relative transition-all duration-500 overflow-hidden cursor-pointer border border-deepLilac/30 hover:border-deepLilac/60" onclick="openTabPanel('generalidades')">
+                    <div class="absolute inset-0 bg-gradient-to-br from-deepLilac/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute top-0 right-0 p-8 font-space-grotesk text-4xl font-bold text-deepLilac/20 group-hover:text-deepLilac/40 transition-colors">01</div>
+                    <h3 class="text-xs tracking-[0.2em] uppercase font-space-grotesk font-bold mb-4 text-paleSky relative z-10">Generalidades Operacionales</h3>
+                    <p class="text-xs text-dustyDenim font-light leading-relaxed tracking-wide relative z-10">Estructuración conceptual del dispositivo, definición de objetivos operacionales y viabilidad del sistema biónico.</p>
+                    <div class="mt-8 text-[9px] tracking-[0.25em] uppercase font-space-grotesk font-bold text-deepLilac group-hover:translate-x-2 transition-transform inline-block relative z-10">Ver Documento →</div>
+                </div>
+                
+                <div class="glass-card group block p-12 relative transition-all duration-500 overflow-hidden cursor-pointer border border-deepLilac/30 hover:border-deepLilac/60" onclick="openTabPanel('mercados')">
+                    <div class="absolute inset-0 bg-gradient-to-br from-deepLilac/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute top-0 right-0 p-8 font-space-grotesk text-4xl font-bold text-deepLilac/20 group-hover:text-deepLilac/40 transition-colors">02</div>
+                    <h3 class="text-xs tracking-[0.2em] uppercase font-space-grotesk font-bold mb-4 text-paleSky relative z-10">Estudio de Mercados & Costos</h3>
+                    <p class="text-xs text-dustyDenim font-light leading-relaxed tracking-wide relative z-10">Análisis sistemático de costos de manufactura aditiva, proyección de impacto y desglose logístico de insumos.</p>
+                    <div class="mt-8 text-[9px] tracking-[0.25em] uppercase font-space-grotesk font-bold text-deepLilac group-hover:translate-x-2 transition-transform inline-block relative z-10">Ver Documento →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="analisis" class="py-28 px-8 md:px-24 border-b border-deepLilac/20 bg-shadowGrey">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16 border-b border-deepLilac/20 pb-8">
+                <div>
+                    <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-3">Validación de Mercado</span>
+                    <h2 class="font-space-grotesk text-4xl font-bold tracking-widest text-paleSky">Análisis de Mercado <span class="text-deepLilac">(Encuesta, tablas y gráficas)</span></h2>
+                </div>
+                <button onclick="openChartsModal()" class="text-[9px] tracking-[0.3em] uppercase font-space-grotesk font-bold border-2 border-deepLilac/50 px-8 py-4 hover:bg-deepLilac/20 hover:border-deepLilac text-paleSky transition-all duration-300 rounded">
+                    Ver Todas las Gráficas →
+                </button>
+            </div>
+
+            <div class="max-w-2xl mx-auto glass-card p-8 md:p-12 relative border border-deepLilac/30">
+                <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-deepLilac/30 to-transparent"></div>
+                <h4 class="text-center font-space-grotesk text-xl font-bold text-deepLilac mb-8">Muestra de campo: ¿Conoces el Lenguaje de Señas? (N = 24)</h4>
+                <div class="h-72 relative">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="carrusel" class="py-28 px-8 md:px-24 border-b border-deepLilac/20 bg-[#1a1918]">
+        <div class="max-w-7xl mx-auto">
+            <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-3">Catálogo Visual</span>
+            <h2 class="font-space-grotesk text-4xl font-bold tracking-widest mb-4 text-paleSky">Diseño <span class="text-deepLilac">3D</span></h2>
+            <p class="text-xs tracking-[0.05em] font-light text-dustyDenim mb-16">Galería completa de piezas manufacturadas mediante impresión 3D. Cada componente ha sido meticulosamente diseñado para optimizar la estructura mecánica de la <strong class="text-paleSky">mano robótica interpretadora de señas</strong>. Haz clic en cualquier imagen para ampliarla y explorar los detalles de cada pieza que conforma este innovador dispositivo de asistencia biónica.</p>
+
+            <div class="relative overflow-hidden rounded-lg border border-deepLilac/30">
+                <div class="carousel-container flex gap-8 overflow-x-auto pb-4 px-4" id="imageCarousel" style="scroll-behavior: smooth; mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="circuito" class="py-28 px-8 md:px-24 border-b border-deepLilac/20 bg-shadowGrey">
+        <div class="max-w-7xl mx-auto">
+            <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-3">Integración de Hardware</span>
+            <h2 class="font-space-grotesk text-4xl font-bold tracking-widest mb-4 text-paleSky"><span class="text-deepLilac">Circuito</span></h2>
+            <p class="text-xs tracking-[0.05em] font-light text-dustyDenim mb-16">Diseño optimizado para máxima eficiencia en el ensamblaje del proyecto. Cada conexión ha sido estratégicamente posicionada para minimizar latencia, reducir interferencias electromagnéticas y facilitar el mantenimiento y depuración del sistema completo.</p>
+
+            <div class="glass-card p-4 md:p-8 flex items-center justify-center relative overflow-hidden border border-deepLilac/30 rounded-lg">
+                <img src="Gemini_Generated_Image_gexudpgexudpgexu.png" alt="Esquema del Circuito" class="w-full h-auto max-w-4xl" />
+            </div>
+        </div>
+    </section>
+
+    <section id="materiales" class="py-28 px-8 md:px-24 border-b border-deepLilac/20 bg-[#1a1918]">
+        <div class="max-w-7xl mx-auto">
+            <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-3">Especificaciones Técnicas</span>
+            <h2 class="font-space-grotesk text-4xl font-bold tracking-widest mb-16 text-paleSky">Lista de <span class="text-deepLilac">Materiales</span></h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-[11px] tracking-wide">
+                    <thead>
+                        <tr class="border-b border-deepLilac/30">
+                            <th class="text-left py-4 px-6 text-deepLilac font-space-grotesk font-bold uppercase">Componente</th>
+                            <th class="text-left py-4 px-6 text-deepLilac font-space-grotesk font-bold uppercase">Especificaciones Clave</th>
+                            <th class="text-left py-4 px-6 text-deepLilac font-space-grotesk font-bold uppercase">Función en el Proyecto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="materialsTableBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="aplicacion" class="py-28 border-b border-deepLilac/20 overflow-hidden bg-shadowGrey">
+        <div class="max-w-5xl mx-auto text-center mb-16 px-8">
+            <span class="block text-[9px] tracking-[0.4em] uppercase font-space-grotesk font-bold text-deepLilac mb-3">Interfaz Digital</span>
+            <h2 class="font-space-grotesk text-4xl font-bold tracking-widest text-paleSky"><span class="text-deepLilac">Aplicación</span></h2>
+        </div>
+        
+        <div class="flex justify-center px-8">
+            <div class="max-w-2xl w-full" id="appCardsContainer">
+               
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-[#0f0e0d] border-t border-deepLilac/20 text-center text-[9px] tracking-[0.3em] uppercase text-dustyDenim">
+        &copy; 2026 Bridge Bionics — Elevando la Accesibilidad Universal mediante Ecosistemas IoT. | Creado por Juan David Lagos Abondano - 1103
+    </footer>
+
+    <!-- Modal de Gráficas -->
+    <div id="chartsModal" class="fixed inset-0 bg-shadowGrey/95 backdrop-blur-md z-50 hidden overflow-y-auto">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="glass-card w-full max-w-6xl p-8 relative border border-deepLilac/30">
+                <button onclick="closeChartsModal()" class="absolute top-4 right-4 text-paleSky hover:text-deepLilac transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <h3 class="font-space-grotesk text-2xl font-bold text-deepLilac mb-8">Análisis Completo de Gráficas</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="chartsGrid">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+     
+    <div id="loginModal" class="fixed inset-0 bg-shadowGrey/95 backdrop-blur-md z-50 hidden overflow-y-auto flex items-center justify-center">
+        <div class="glass-card w-full max-w-md p-8 relative border border-deepLilac/30 rounded-lg m-4">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-paleSky hover:text-deepLilac transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <h3 class="font-space-grotesk text-2xl font-bold text-deepLilac mb-6 text-center">Iniciar Sesión</h3>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs tracking-[0.2em] uppercase font-space-grotesk font-bold text-paleSky mb-2">Correo</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-3 bg-midnightViolet border border-deepLilac/50 rounded text-paleSky placeholder-dustyDenim focus:outline-none focus:border-deepLilac transition-colors" placeholder="tu@email.com">
+                </div>
+                
+                <div>
+                    <label class="block text-xs tracking-[0.2em] uppercase font-space-grotesk font-bold text-paleSky mb-2">Contraseña</label>
+                    <input type="password" id="loginPassword" required class="w-full px-4 py-3 bg-midnightViolet border border-deepLilac/50 rounded text-paleSky placeholder-dustyDenim focus:outline-none focus:border-deepLilac transition-colors" placeholder="••••••••">
+                </div>
+                
+                <div id="loginError" class="text-red-400 text-xs hidden"></div>
+                
+                <button type="submit" class="w-full mt-6 py-3 bg-deepLilac text-shadowGrey font-bold rounded-lg hover:bg-opacity-90 transition-all duration-300 uppercase tracking-[0.2em] text-sm">Ingresar</button>
+            </form>
+            
+            <p class="text-center text-dustyDenim text-xs mt-4">¿No tienes cuenta? <span style="cursor: pointer;" class="text-deepLilac font-bold hover:underline">Regístrate aquí</span></p>
+        </div>
+    </div>
+
+    
+    <div id="tabPanel" class="fixed inset-0 bg-shadowGrey/95 backdrop-blur-md z-50 hidden overflow-y-auto">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="glass-card w-full max-w-4xl relative max-h-[90vh] overflow-y-auto border border-deepLilac/30">
+                <button onclick="closeTabPanel()" class="sticky top-4 right-4 float-right text-paleSky hover:text-deepLilac transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <div class="flex gap-4 mb-8 border-b border-deepLilac/20 p-8">
+                    <button onclick="switchTab('generalidades')" class="tab-btn active text-xs tracking-[0.2em] uppercase font-space-grotesk font-bold pb-2 border-b-2 border-deepLilac text-paleSky">
+                        
+                    </button>
+                    <button onclick="switchTab('mercados')" class="tab-btn text-xs tracking-[0.2em] uppercase font-space-grotesk font-bold pb-2 text-dustyDenim hover:text-paleSky">
+                        
+                    </button>
+                </div>
+
+                <div class="p-8">
+                    <div id="tab-generalidades" class="tab-content">
+                        <iframe src="generalidades del proyecto.pdf" class="w-full h-[600px] border border-deepLilac/20 rounded"></iframe>
+                    </div>
+                    <div id="tab-mercados" class="tab-content hidden">
+                        <iframe src="estudio de mercados.pdf" class="w-full h-[600px] border border-deepLilac/20 rounded"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="firebase.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
